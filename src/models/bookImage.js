@@ -19,10 +19,9 @@ const BookImage = Model.define(
   },
   {
     tableName: "book_images",
-    timestamps: false,
-    // updatedAt: "updated_at",
-    // createdAt: "created_at",
-    // deletedAt: "deleted_at"
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+    deletedAt: false
   }
 );
 

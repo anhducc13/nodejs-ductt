@@ -5,6 +5,7 @@ import publishers from "./publishers";
 import extra from "./extra";
 import categories from "./categories";
 import books from "./books";
+import marketproduct from "./marketproduct";
 
 const routes = Router();
 
@@ -18,5 +19,6 @@ routes.use("/publishers", publishers);
 routes.use("/extra", extra);
 routes.use("/categories", categories);
 routes.use("/books", books);
+routes.use("/marketproduct", marketproduct);
 
 export default routes;

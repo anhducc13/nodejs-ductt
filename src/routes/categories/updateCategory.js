@@ -7,7 +7,7 @@ export default [
     .isInt({ min: 1 })
     .withMessage("ID must be a integer > 0"),
   body("short_name")
-    .if(value => value !== undefined)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Short name must be a string")
     .isLength({ min: 6, max: 255 })
@@ -22,7 +22,7 @@ export default [
       });
     }),
   body("name")
-    .if(value => value !== undefined)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Name must be a string")
     .isLength({ min: 6, max: 255 })
@@ -37,7 +37,7 @@ export default [
       });
     }),
   body("description")
-    .if(value => value !== undefined)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Description must be a string"),
   body("is_active")
@@ -76,24 +76,13 @@ export default [
         if (!cat) {
           return apiResponse.notFoundResponse(res, "Not found author");
         } else {
-          const p = await cat.getParent();
-          console.log(p);
-          if (req.body.short_name) {
-            cat.short_name = req.body.short_name;
-            cat.url = commonHelpers.generateUrl(req.body.short_name);
-          }
-          if (req.body.name) {
-            cat.name = req.body.name;
-          }
-          if (req.body.description) {
-            cat.description = req.body.description;
-          }
-          if (req.body.is_active) {
-            cat.is_active = req.body.is_active;
-          }
-          if (req.body.parent_id) {
-            cat.parent_id = req.body.parent_id;
-          }
+          cat.short_name = req.body.short_name;
+          cat.url = commonHelpers.generateUrl(req.body.short_name);
+          cat.name = req.body.name;
+          cat.description = req.body.description;
+          cat.is_active = !!req.body.is_active;
+          await cat.setChildren([]);
+          cat.parent_id = req.body.parent_id;
           await cat.save();
           return apiResponse.successResponseWithData(
             res,

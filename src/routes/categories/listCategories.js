@@ -61,7 +61,7 @@ export default [
         }
         let queryIsParent = {}
         if (req.query.is_parent) {
-          if (req.query.is_parent === "true") {
+          if (req.query.is_parent === "false") {
             queryIsParent = {
               parent_id: { $ne: null }
             };

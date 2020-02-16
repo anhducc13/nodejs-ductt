@@ -49,22 +49,11 @@ const User = Model.define(
       type: DataType.STRING,
       defaultValue: null
     },
-    created_at: {
-      allowNull: false,
-      type: DataType.DATE,
-      defaultValue: DataType.fn("NOW")
-    },
-    updated_at: {
-      allowNull: false,
-      type: DataType.DATE,
-      defaultValue: DataType.literal("CURRENT_TIMESTAMP")
-    }
   },
   {
-    timestamps: false
-    // updatedAt: "updated_at",
-    // createdAt: "created_at",
-    // deletedAt: "deleted_at"
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+    deletedAt: false
   }
 );
 

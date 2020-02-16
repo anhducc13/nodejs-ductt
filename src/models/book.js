@@ -4,6 +4,7 @@ import Category from "./category";
 import Publisher from "./publisher";
 import Author from "./author";
 import BookImage from "./bookImage";
+import { SALE_STATUS } from "../constants/product";
 
 const Book = Model.define(
   "Book",
@@ -21,6 +22,10 @@ const Book = Model.define(
       type: DataType.STRING,
       unique: true
     },
+    url: {
+      type: DataType.STRING,
+      defaultValue: null
+    },
     short_description: {
       type: DataType.TEXT,
       defaultValue: null
@@ -30,7 +35,7 @@ const Book = Model.define(
       defaultValue: null
     },
     release_date: {
-      type: DataType.DATEONLY,
+      type: DataType.DATE,
       defaultValue: null
     },
     number_of_pages: {
@@ -75,7 +80,7 @@ const Book = Model.define(
     },
     sale_status: {
       type: DataType.ENUM,
-      values: ["UPCOMING", "AVAILABLE", "OUTOFSTOCK", "SUSPENSION"],
+      values: Object.values(SALE_STATUS),
       defaultValue: null
     },
     is_active: {
@@ -85,14 +90,13 @@ const Book = Model.define(
     publisher_id: {
       type: DataType.INTEGER,
       defaultValue: null,
-      allowNull: true,
+      allowNull: true
     }
   },
   {
-    timestamps: false,
-    // updatedAt: "updated_at",
-    // createdAt: "created_at",
-    // deletedAt: "deleted_at"
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+    deletedAt: false
   }
 );
 

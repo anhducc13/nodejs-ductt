@@ -32,7 +32,7 @@ export default [
       });
     }),
   body("description")
-    .if(value => value !== undefined)
+    .if(value => value !== undefined || value === null)
     .isString()
     .withMessage("Description must be a string"),
   body("is_active")

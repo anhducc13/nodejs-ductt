@@ -31,10 +31,9 @@ const Author = Model.define(
     }
   },
   {
-    timestamps: false,
-    // updatedAt: "updated_at",
-    // createdAt: "created_at",
-    // deletedAt: "deleted_at"
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+    deletedAt: false
   }
 );
 
