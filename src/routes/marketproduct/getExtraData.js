@@ -49,11 +49,7 @@ const attrCats = ["name", "short_name", "id", "parent_id", "is_active", "url"];
 const getCategories = async () => {
   const cats = await Category.findAll({
     where: {
-      $and: [
-        {
-          is_active: true
-        }
-      ]
+      is_active: true
     },
     attributes: attrCats,
     order: [["name", "ASC"]],

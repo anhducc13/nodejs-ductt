@@ -3,7 +3,7 @@ import { Category, Book, BookImage } from "../../models";
 import { apiResponse } from "../../helpers";
 import { SALE_STATUS } from "../../constants/product";
 
-const availableSortFields = ["name", "sale_price", "updated_at"];
+const availableSortFields = ["name", "sale_price", "created_at"];
 const availableOrderTypes = ["desc", "asc"];
 
 export default [
@@ -87,6 +87,7 @@ export default [
               "root_price",
               "sale_price",
               "sale_status",
+              "created_at",
               "updated_at",
               "quantity_in_stock",
               "url",

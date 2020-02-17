@@ -33,11 +33,11 @@ export default [
       });
     }),
   body("short_description")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Short description must be a string"),
   body("description")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Description must be a string"),
   body("is_active")
@@ -45,7 +45,7 @@ export default [
     .isBoolean()
     .withMessage("Status must be boolean type"),
   body("release_date")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .custom(value => {
       if (!validateHelpers.isValidDate(value)) {
         throw new Error("Format date: DD-MM-YYYY");
@@ -53,19 +53,19 @@ export default [
       return true;
     }),
   body("number_of_pages")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isInt({ min: 1 })
     .withMessage("Number of page must be integer >= 1"),
   body("weight")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isFloat({ min: 0 })
     .withMessage("Weight must be >= 0"),
   body("size")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isString()
     .withMessage("Size must be a string"),
   body("on_sale_date")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .custom(value => {
       console.log(value);
       if (!validateHelpers.isValidDate(value)) {
@@ -74,33 +74,33 @@ export default [
       return true;
     }),
   body("import_price")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isFloat({ min: 0 })
     .withMessage("import_price must be >= 0"),
   body("root_price")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isFloat({ min: 0 })
     .withMessage("root_price must be >= 0"),
   body("sale_price")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isFloat({ min: 0 })
     .withMessage("sale_price must be >= 0"),
   body("quantity_in_stock")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isInt({ min: 0 })
     .withMessage("quantity_in_stock must be >= 0"),
   body("demo")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isURL()
     .withMessage("demo file must be url"),
   body("sale_status")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isIn(["UPCOMING", "AVAILABLE", "OUTOFSTOCK", "SUSPENSION"])
     .withMessage(
       "sale_status must be in [UPCOMING,AVAILABLE,OUTOFSTOCK,SUSPENSION]"
     ),
   body("category_ids")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isArray()
     .withMessage("category_ids must be array")
     .custom(async value => {
@@ -118,11 +118,11 @@ export default [
       }
     }),
   body("images")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isArray()
     .withMessage("images must be array"),
   body("author_ids")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isArray()
     .withMessage("author_ids must be array")
     .custom(async value => {
@@ -138,7 +138,7 @@ export default [
       }
     }),
   body("publisher_id")
-    .if(value => value !== undefined || value === null)
+    .if(value => value !== undefined && value !== null)
     .isInt({ min: 0 })
     .withMessage("publisher_id must be integer")
     .custom(async value => {

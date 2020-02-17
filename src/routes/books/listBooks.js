@@ -5,6 +5,7 @@ import { apiResponse } from "../../helpers";
 const availableSortFields = [
   "id",
   "name",
+  "short_name",
   "url",
   "quantity_in_stock",
   "sale_price"
