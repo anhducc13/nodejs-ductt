@@ -16,15 +16,27 @@ export const CODES_EXTRA_DATA = {
 };
 
 export const ORDER_STATUS = {
-  CREATED: "created",
-  PAYMENT_IN_PROGRESS: "payment_in_progress",
-  PAYMENT_ERROR: "payment_error",
-  PICKING_UP: "picking_up",
-  DELIVERY: "delivery",
-  DELIVERIED: "delivered",
-  REFUNDED: "refunded",
-  SUCCESS: "success"
+  DRAFT: "draft",
+  OPEN: "open",
+  ARCHIVED: "archived",
+  CANCELED: "canceled"
 };
+
+export const PAYMENT_STATUS = {
+  AUTHORIZED: "authorized",
+  UNPAID: "unpaid",
+  PARTIALLY_PAID: "partially_paid",
+  PAID: "paid",
+  PARTIALLY_REFUNDED: "partially_refunded",
+  REFUNDED: "refunded",
+  VOIDED: "voided"
+}
+
+export const SHIPPING_STATUS = {
+  UNFULFILLED: "unfulfilled",
+  PARTIALLY_FULFILLED: "partially_fulfilled",
+  FULFILLED: "fulfilled"
+}
 
 export const PAYMENT_METHOD = {
   ONLINE: "online",
