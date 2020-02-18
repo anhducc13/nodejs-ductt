@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../models/user";
 import { apiResponse } from "../../helpers";
+import config from "../../config";
 
 export default [
   checkSchema({
@@ -40,7 +41,7 @@ export default [
           }
         }).then(user => {
           if (user) {
-            bcrypt.compare(req.body.password, user.password_hash, function(
+            bcrypt.compare(req.body.password, user.password_hash, function (
               err,
               same
             ) {
@@ -56,11 +57,10 @@ export default [
                     id: user.id
                   };
                   const jwtData = {
-                    expiresIn: "1h"
+                    expiresIn: parseInt(config.expiredTime) * 60
                   };
-                  const secret = "ductt";
-                  //Generated JWT token with Payload and secret.
-                  dataRes.token = jwt.sign(jwtPayload, secret, jwtData);
+                  dataRes.token = jwt.sign(jwtPayload, config.secretKey, jwtData);
+
                   return apiResponse.successResponseWithData(
                     res,
                     "Login Success.",
@@ -73,14 +73,14 @@ export default [
                   );
                 }
               } else {
-                return apiResponse.unauthorizedResponse(
+                return apiResponse.validationErrorWithData(
                   res,
                   "Username, Email or Password wrong."
                 );
               }
             });
           } else {
-            return apiResponse.unauthorizedResponse(
+            return apiResponse.validationErrorWithData(
               res,
               "Username, Email or Password wrong."
             );

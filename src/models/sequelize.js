@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
-import { databaseUrl } from '../config';
+import config from '../config';
 
-const sequelize = new Sequelize(databaseUrl, {
+const sequelize = new Sequelize(config.databaseUrl, {
   define: {
     // don't delete database entries but set the newly added attribute deletedAt
     // to the current date (when deletion was done). paranoid will only work if

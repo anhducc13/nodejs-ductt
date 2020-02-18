@@ -1,7 +1,7 @@
 import DataType from "sequelize";
 import Model from "./sequelize";
 import Book from "./book";
-import { ORDER_STATUS, SHIPPING_METHOD, PAYMENT_METHOD } from "../constants/product";
+import { ORDER_STATUS, SHIPPING_METHOD, PAYMENT_METHOD, PAYMENT_STATUS, SHIPPING_STATUS } from "../constants/product";
 
 const Order = Model.define(
   "Order",
@@ -21,10 +21,20 @@ const Order = Model.define(
       values: Object.values(PAYMENT_METHOD),
       defaultValue: PAYMENT_METHOD.ONLINE
     },
-    status: {
+    order_status: {
       type: DataType.ENUM,
       values: Object.values(ORDER_STATUS),
-      defaultValue: ORDER_STATUS.CREATED
+      defaultValue: ORDER_STATUS.DRAFT
+    },
+    payment_status: {
+      type: DataType.ENUM,
+      values: Object.values(PAYMENT_STATUS),
+      defaultValue: PAYMENT_STATUS.UNPAID,
+    },
+    shipping_status: {
+      type: DataType.ENUM,
+      values: Object.values(SHIPPING_STATUS),
+      defaultValue: SHIPPING_STATUS.UNFULFILLED,
     },
     comment: {
       type: DataType.TEXT,
@@ -38,10 +48,6 @@ const Order = Model.define(
       type: DataType.JSON,
       defaultValue: null,
     },
-    payment_info: {
-      type: DataType.JSON,
-      defaultValue: null
-    }
   },
   {
     updatedAt: "updated_at",
