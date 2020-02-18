@@ -7,5 +7,5 @@ export const databaseUrl = process.env.DATABASE_URL || 'mysql://root:123456@loca
 export default {
   environment,
   port,
-  databaseUrl,
-}
+  databaseUrl
+};
