@@ -1,5 +1,5 @@
 import { validationResult, query } from "express-validator";
-import { Book } from "../../models";
+import { Book, BookImage } from "../../models";
 import { apiResponse } from "../../helpers";
 
 const availableSortFields = [
@@ -99,6 +99,13 @@ export default [
               }
             ]
           },
+          include: [
+            {
+              model: BookImage,
+              as: "images",
+              attributes: ["url"]
+            }
+          ],
           order: [[sort_by, order_by]],
           limit: parseInt(page_size),
           offset: (page - 1) * page_size

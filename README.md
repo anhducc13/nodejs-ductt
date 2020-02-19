@@ -6,6 +6,8 @@ Written in ES6, using [Express.js](http://expressjs.com/) and [Sequelize.js](htt
 
 ## Development
 
+Create file .env (.env.example is mock file)
+
 Run the server with `npm run dev`
 
 This will copy contents in src, create dist folder and serve the application.
@@ -17,6 +19,7 @@ Run `npm run build`
 ## Environment Variables
 
 This boilerplate uses a [dotenv](https://github.com/motdotla/dotenv) which will load a `.env` file that you should create inside src. The file should look like this:
+
 ```
 PORT=8000
 NODE_ENV=development
