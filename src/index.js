@@ -8,6 +8,8 @@ import PrettyError from "pretty-error";
 import config from "./config";
 import models from "./models";
 import routes from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger";
 
 const ENV = config.environment;
 const port = config.port;
@@ -32,6 +34,7 @@ if (ENV === "development") {
 // =============================================================================
 // all routes will be prefixed with /api
 app.use("/api", routes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Error handling
 // =============================================================================
@@ -69,4 +72,3 @@ models
       console.log(`The server is running at http://localhost:${port}/`);
     });
   });
-/* eslint-enable no-console */
