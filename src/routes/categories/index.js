@@ -8,7 +8,7 @@ import { isAuthenticated } from "../auth/authenticate";
 
 const categories = Router();
 
-categories.get("/", isAuthenticated, listCategories);
+categories.get("/", isAuthenticated, ...listCategories);
 categories.post("/", isAuthenticated, createCategory);
 categories.put("/:id", isAuthenticated, updateCategory);
 categories.get("/:id", isAuthenticated, detailCategory);

@@ -15,7 +15,7 @@ module.exports = {
   },
   servers: [
     {
-      url: "http://localhost:3000/api",
+      url: "http://localhost:3001/api",
       description: "Local server"
     }
   ],
@@ -30,6 +30,9 @@ module.exports = {
     },
     {
       category: "Category Op"
+    },
+    {
+      order: "Order Op"
     }
   ],
   paths: {
@@ -123,6 +126,34 @@ module.exports = {
             required: true
           }
         ],
+        responses: {
+          "200": {
+            description: "Success",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/getOneBookResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      post: {
+        tags: ["Order Op"],
+        description: "Admin add order",
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/createOrderBody"
+              }
+            }
+          },
+          required: true
+        },
         responses: {
           "200": {
             description: "Success",
@@ -258,7 +289,57 @@ module.exports = {
             example: {}
           }
         }
-      }
+      },
+      createOrderBody: {
+        type: "object",
+        properties: {
+          shipping_method: {
+            type: "string",
+            enum: [
+              "delivery",
+            ],
+          },
+          payment_method: {
+            type: "string",
+            enum: [
+              "online",
+              "offline"
+            ]
+          },
+          final_payment: {
+            type: "number",
+          },
+          order_info: {
+            type: "string",
+            example: "{}"
+          },
+          delivery_info: {
+            type: "string",
+            example: "{}"
+          },
+          comment: {
+            type: "string",
+            example: ""
+          },
+          products: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: {
+                  type: "number"
+                },
+                quantity: {
+                  type: "number"
+                },
+                buy_price: {
+                  type: "number"
+                }
+              }
+            }
+          }
+        }
+      },
     },
     securitySchemes: {
       ApiKeyAuth: {

@@ -1,6 +1,6 @@
 const successResponse = (res, msg) => {
   const data = {
-    code: 0,
+    code: "SUCCESS",
     message: msg,
     errors: null,
   };
@@ -9,7 +9,7 @@ const successResponse = (res, msg) => {
 
 const successResponseWithData = (res, msg, data) => {
   const resData = {
-    code: 0,
+    code: "SUCCESS",
     message: msg,
     data: data,
     errors: null
@@ -17,7 +17,7 @@ const successResponseWithData = (res, msg, data) => {
   return res.status(200).json(resData);
 };
 
-const errorResponse = (res, msg, code = 1) => {
+const errorResponse = (res, msg, code = "UNKNOWN_ERROR") => {
   const data = {
     code: code,
     message: msg,
@@ -36,7 +36,7 @@ const notFoundResponse = (res, msg, code = "NOT_FOUND") => {
   return res.status(404).json(data);
 };
 
-const validationErrorWithData = (res, msg, data, code = 1) => {
+const validationErrorWithData = (res, msg, data, code = "BAD_REQUEST") => {
   const resData = {
     code: code,
     message: msg,

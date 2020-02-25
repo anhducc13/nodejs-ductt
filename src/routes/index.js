@@ -8,6 +8,7 @@ import books from "./books";
 import cities from "./cities";
 import districts from "./districts";
 import wards from "./wards";
+import orders from "./orders";
 import marketproduct from "./marketproduct";
 
 const routes = Router();
@@ -25,6 +26,7 @@ routes.use("/books", books);
 routes.use("/cities", cities);
 routes.use("/districts", districts);
 routes.use("/wards", wards);
+routes.use("/orders", orders);
 routes.use("/marketproduct", marketproduct);
 
 export default routes;

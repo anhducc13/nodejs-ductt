@@ -1,6 +1,45 @@
 import { body, validationResult } from "express-validator";
 import { Category } from "../../models";
+import { checkDuplicateCategory } from "../../middlewares/duplicate";
+import { validateString, validateNumber } from "../../middlewares/common";
 import { apiResponse, commonHelpers } from "../../helpers";
+
+export default [
+  validateString("short_name", "body", { required: true }),
+  validateString("name", "body", { required: true }),
+  checkDuplicateCategory(["short_name", "short_name", "body"]),
+  checkDuplicateCategory(["name", "name", "body"]),
+  validateString("description", "body"),
+  validateIncludes("is_active", "body", [true, false]),
+  validateNumber("parent_id", "body"),
+  async (req, res) => {
+    try {
+      let newCategory = {
+        name: req.body.name,
+        short_name: req.body.short_name
+      };
+      newCategory.url = commonHelpers.generateUrl(req.body.short_name);
+      if (req.body.parent_id) {
+        newCategory.parent_id = req.body.parent_id;
+      }
+      if (req.body.description) {
+        newCategory.description = req.body.description;
+      }
+      if (req.body.is_active) {
+        newCategory.is_active = req.body.is_active;
+      }
+      const c = await Category.create(newCategory);
+      return apiResponse.successResponseWithData(
+        res,
+        "Create Category Success.",
+        c
+      );
+    } catch (err) {
+      console.log(err);
+      return apiResponse.errorResponse(res, err);
+    }
+  }
+]
 
 export default [
   body("short_name")
